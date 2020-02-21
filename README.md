@@ -1,6 +1,9 @@
 # IDWorker
 一个分布式ID生成算法 .NET Standard >= 1.1
 
+## .NET Standard
+.NET Standard >= 1.1
+
 ## 用法
 ```C#
 //获取一个开始时间戳
