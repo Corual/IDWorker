@@ -4,7 +4,7 @@
 ## .NET Standard
 .NET Standard >= 1.1
 
-## 用法
+## SnowflakeIdWorker用法
 ```C#
 //获取一个开始时间戳
 long startTimestmap = (long)(DateTime.UtcNow.AddDays(-20) - new DateTime(1970, 1, 1, 0, 0, 0, DateTimeKind.Utc)).TotalMilliseconds;
