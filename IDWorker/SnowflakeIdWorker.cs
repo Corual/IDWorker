@@ -188,7 +188,13 @@ namespace IDWorker
         /// <summary>
         /// 生成一个分布式ID
         /// </summary>
-        /// <returns></returns>
+        /// <returns>
+        /// 返回值：
+        ///     返回long类型的Id
+        /// 异常:
+        ///   TimeRegressionException:
+        ///     当检测到系统时间回拨的时候会抛出此异常
+        /// </returns>
         public long NextId()
         {
             lock (_syncLock)
