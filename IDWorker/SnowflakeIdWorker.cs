@@ -137,7 +137,7 @@ namespace IDWorker
         /// <returns>如果调用方没有传入，就随机分配一个</returns>
         private long GetDatacenterId(long datacenterId)
         {
-            return datacenterId > -1 ? datacenterId : (new Random().Next(0, MAX_DATA_CENTER_COUNT + 1));
+            return (MAX_DATA_CENTER_COUNT & datacenterId) > -1 ? datacenterId : (new Random().Next(0, MAX_DATA_CENTER_COUNT + 1));
         }
 
         /// <summary>
@@ -147,7 +147,7 @@ namespace IDWorker
         /// <returns>如果调用方没有传入，就随机分配一个</returns>
         private long GetMachineId(long machineId)
         {
-            return machineId > -1 ? machineId : (new Random().Next(0, MAX_MACHINE_NODE + 1));
+            return (MAX_MACHINE_NODE & machineId) > -1 ? machineId : (new Random().Next(0, MAX_MACHINE_NODE + 1));
         }
 
 
