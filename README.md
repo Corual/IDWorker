@@ -2,7 +2,7 @@
 一个分布式ID生成算法
 
 ## .NET Standard
-.NET Standard >= 1.1
+.NET Standard = 1.1
 
 ## SnowflakeIdWorker用法
 ```C#
