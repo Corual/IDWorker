@@ -58,27 +58,34 @@ namespace IDWorker.Test
             AutoResetEvent autoResetEvent = new AutoResetEvent(false);
             int invokeCount = 0;
 
-            for (int i = 0; i < count; i++)
+            try
             {
-                Task.Run(() =>
+                for (int i = 0; i < count; i++)
                 {
-                    var id = iDWorker.NextId();
-                    lock (testLock)
+                    Task.Run(() =>
                     {
-                        idSet.Add(id);
-                    }
+                        var id = iDWorker.NextId();
+                        lock (testLock)
+                        {
+                            idSet.Add(id);
+                        }
 
-                    Console.WriteLine(id);
-                    if (count == Interlocked.Increment(ref invokeCount))
-                    {
-                        autoResetEvent.Set();
-                        Console.WriteLine("go!");
-                    }
-                });
+                        Console.WriteLine(id);
+                        if (count == Interlocked.Increment(ref invokeCount))
+                        {
+                            autoResetEvent.Set();
+                            Console.WriteLine("go!");
+                        }
+                    });
 
+                }
+
+                autoResetEvent.WaitOne();
             }
-
-            autoResetEvent.WaitOne();
+            finally
+            {
+                autoResetEvent.Dispose();
+            }
             Assert.AreEqual(count, idSet.Count);
             Assert.AreEqual(count, invokeCount);
         }
