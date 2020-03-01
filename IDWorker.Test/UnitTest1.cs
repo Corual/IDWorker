@@ -67,7 +67,11 @@ namespace IDWorker.Test
                         var id = iDWorker.NextId();
                         lock (testLock)
                         {
-                            idSet.Add(id);
+                            if (!idSet.Add(id))
+                            {
+                                autoResetEvent.Set();
+                                return;
+                            }
                         }
 
                         Console.WriteLine(id);
